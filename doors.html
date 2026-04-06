@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 04 — Doors | Bahay Kubo</title>
+  <!--
+    FILE: modules/doors.html
+    LOCATION: /modules/ folder
+    QR CODE TARGET: Link this file's URL to a QR code placed on the miniature house model
+    LINKS BACK TO: ../index.html
+    LOADS: ../css/style.css, ../js/data.js
+    NOTE: No app.js needed — this page only reads localStorage, does not write.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+ 
+  <!-- Top nav with back link to main dashboard -->
+  <nav class="top-nav">
+    <a class="nav-brand" href="index.html">BAHAY KUBO</a>
+   <a class="back-link" href="index.html" 
+   onclick="sessionStorage.setItem('goto','student-dashboard')">← Back to Dashboard</a>
+  </nav>
+ 
+  <div class="module-page-wrap">
+ 
+    <!-- Module header -->
+    <div class="mod-eyebrow">MODULE 04 · INDUSTRIAL ARTS · TLE GRADE 9</div>
+    <h1 class="mod-title">Doors</h1>
+    <p class="mod-subtitle">Door types, frames, parts, and hardware installation</p>
+    <hr style="height:1.5px;background:var(--comp-border);border:none;margin-bottom:28px"/>
+ 
+    <!-- Module content — rendered from MODULE_DATA['doors'].content in data.js -->
+    <div id="mod-content"></div>
+ 
+    <!-- Teacher-assigned resource cards for this module -->
+    <div class="mod-resources">
+      <h4>📌 Activities &amp; Resources</h4>
+      <div id="mod-acts" class="act-grid"></div>
+    </div>
+ 
+  </div><!-- /module-page-wrap -->
+ 
+  <!-- Load shared data (MODULE_DATA lives here) -->
+  <script src="data.js"></script>
+<script>
+   const key = 'doors';
+  const mod = MODULE_DATA[key];
+ 
+  /* ── Build the DepEd-format module header ── */
+  function buildHeader(m) {
+    return `
+      <div class="deped-header">
+        <div class="deped-logo-row">
+          <div class="deped-text-block">
+            <div class="deped-republic">Republic of the Philippines</div>
+            <div class="deped-dept">Department of Education</div>
+            <div class="deped-region">NATIONAL CAPITAL REGION</div>
+            <div class="deped-division">SCHOOLS DIVISION OF (name of division)</div>
+            <div class="deped-school">(name of school)</div>
+          </div>
+        </div>
+        <div class="deped-spec-row">
+          <span class="deped-spec">TLE 9 – INDUSTRIAL ARTS</span>
+          <span class="deped-quarter">${m.quarter || 'QUARTER NO. II/IV'} – WEEK NO. – LESSON NO.</span>
+        </div>
+        <div class="deped-topic">${m.topic || m.title}</div>
+      </div>
+ 
+      <div class="mod-competency-block">
+        <div class="mod-block-label">📌 Learning Competency/ies (Essential Competencies)</div>
+        ${m.competencies || ''}
+      </div>
+ 
+      <div class="mod-objectives-block">
+        <div class="mod-block-label">🎯 Objectives</div>
+        ${m.objectives || ''}
+      </div>
+    `;
+  }
+ 
+  /* ── Build accordion section cards ── */
+  function buildAccordion(id, icon, title, content) {
+    return `
+      <div class="acc-card" id="acc-${id}">
+        <button class="acc-header" onclick="toggleAcc('acc-${id}')">
+          <span class="acc-icon">${icon}</span>
+          <span class="acc-title">${title}</span>
+          <span class="acc-chevron">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-content">${content}</div>
+        </div>
+      </div>
+    `;
+  }
+ 
+ function toggleAcc(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    // Close all accordions first
+    document.querySelectorAll('.acc-card').forEach(c => c.classList.remove('open'));
+    // If it wasn't open, open it
+    if (!isOpen) card.classList.add('open');
+  }
+ 
+  /* ── Render everything ── */
+  (function render() {
+    if (!mod) {
+      document.getElementById('mod-content').innerHTML =
+        '<p style="color:var(--brown-light);font-style:italic">Content not found.</p>';
+      return;
+    }
+ 
+    // 1. Module header
+    document.getElementById('mod-content').innerHTML = buildHeader(mod);
+ 
+    // 2. Accordion resource cards (exclude Let's Try — goes to Assessments)
+    const sections = [
+      { id: 'recall',     icon: '📖', label: "Let's Recall (Review)",              content: mod.recall      || '' },
+      { id: 'understand', icon: '📚', label: "Let's Understand (Study the Concept)", content: mod.understand  || '' },
+      { id: 'apply',      icon: '✏️', label: "Let's Apply",                         content: mod.apply       || '' },
+      { id: 'analyze',    icon: '🔍', label: "Let's Analyze",                       content: mod.analyze     || '' },
+      { id: 'create',     icon: '🔨', label: "Let's Create",                        content: mod.letsCreate  || '' },
+    ];
+ 
+    let accordionHTML = '<div class="acc-section-label">📋 Activities &amp; Resources</div>';
+    sections.forEach(s => {
+      if (s.content) {
+        accordionHTML += buildAccordion(`${key}-${s.id}`, s.icon, s.label, s.content);
+      }
+    });
+ 
+    // Teacher-assigned cards (still shown after built-in sections)
+    try {
+      const assignments  = JSON.parse(localStorage.getItem('mod_assignments') || '{}');
+      const allCards     = JSON.parse(localStorage.getItem('mod_cards')       || '[]');
+      const ids          = assignments[key] || [];
+      const teacherCards = ids.map(id => allCards.find(c => c.id === id)).filter(Boolean);
+ 
+      if (teacherCards.length) {
+        accordionHTML += '<div class="acc-section-label" style="margin-top:20px">📌 Teacher-Assigned Resources</div>';
+        teacherCards.forEach(c => {
+          const body = `
+            <p>${c.desc || ''}</p>
+            ${c.link ? `<a class="act-link" href="${c.link}" target="_blank">🔗 Open Activity</a>` : ''}
+          `;
+          accordionHTML += buildAccordion(`teacher-${c.id}`, c.type.split(' ')[0] || '🔗', c.name, body);
+        });
+      }
+    } catch(e) {}
+ 
+    document.getElementById('mod-acts').innerHTML = accordionHTML;
+    document.querySelector('.mod-resources h4').style.display = 'none'; // hide default heading
+ 
+    // 3. Push "Let's Try" to the Assessments section in localStorage
+    //    so it appears in the Student Assessments tab
+    if (mod.letsTry) {
+      try {
+        const assKey = `builtin_assessment_${key}`;
+        const existing = JSON.parse(localStorage.getItem('assess_cards') || '[]');
+        const alreadyAdded = existing.some(c => c.id === assKey);
+        if (!alreadyAdded) {
+          existing.push({
+            id:    assKey,
+            title: `Let's Try (Evaluation) — ${mod.title}`,
+            type:  '📝 Assessment',
+            desc:  `Evaluation quiz for the ${mod.title} module.`,
+            link:  '',
+            content: mod.letsTry
+          });
+          localStorage.setItem('assess_cards', JSON.stringify(existing));
+        }
+      } catch(e) {}
+    }
+  })();
+</script>
+
+
+ 
+</body>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bahay Kubo — Carpentry Works OER</title>
+  <!--
+    FILE: index.html
+    LOCATION: root folder (same level as /modules/, /css/, /js/)
+    ROLE: Main dashboard — landing page, student dashboard, teacher dashboard
+    LINKS TO: /modules/partitions.html … /modules/cabinets.html (via <a href> tags)
+    LOADS: /css/style.css, /js/data.js, /js/app.js
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+ 
+<!-- ══════════════════════════════════════
+     LANDING PAGE
+     ══════════════════════════════════════ -->
+<div id="page-landing" class="page active">
+  <div class="landing-wrap">
+ 
+    <header class="landing-header">
+      <h1 class="big-title">BAHAY KUBO</h1>
+      <p class="subtitle">Open Educational Resource for Carpentry Works and Residential Structures</p>
+      <div class="h-divider"></div>
+      <span class="tag">INDUSTRIAL ARTS · TLE GRADE 9</span>
+    </header>
+ 
+    <!-- Hero image: name it hero.jpg and place it in the root folder -->
+    <div class="hero-wrap">
+      <img src="hero.jpg" alt="Bahay Kubo Heritage House" class="hero-img"
+           onerror="this.style.display='none'"/>
+      <div class="hero-hint">[ Place hero image here — name it hero.jpg ]</div>
+    </div>
+ 
+    <div class="role-cards">
+      <div class="role-card">
+        <div class="card-icon">🎓</div>
+        <h2 class="card-title">STUDENT</h2>
+        <p class="card-desc">Access interactive learning modules, assessments, and building guides for residential carpentry</p>
+        <button class="role-btn" onclick="goTo('page-student'); showStudentSection('dashboard')">Enter as Student</button>
+      </div>
+      <div class="role-card">
+        <div class="card-icon">📖</div>
+        <h2 class="card-title">TEACHER</h2>
+        <p class="card-desc">Access teaching resources, daily lesson logs, module activities, and assessment tools</p>
+        <button class="role-btn" onclick="openPasscode()">Enter as Teacher</button>
+      </div>
+    </div>
+ 
+  </div>
+</div><!-- /page-landing -->
+ 
+ 
+<!-- ══════════════════════════════════════
+     STUDENT PAGE
+     ══════════════════════════════════════ -->
+<div id="page-student" class="page">
+ 
+  <nav class="top-nav">
+    <span class="nav-brand" onclick="goTo('page-landing')">BAHAY KUBO</span>
+    <div class="nav-links">
+      <a href="#" class="nav-link active"
+         onclick="showStudentSection('dashboard'); return false;">Dashboard</a>
+      <a href="#" class="nav-link"
+         onclick="showStudentSection('modules'); return false;">Modules</a>
+      <a href="#" class="nav-link"
+         onclick="showStudentSection('assessments'); return false;">Assessments</a>
+    </div>
+  </nav>
+ 
+  <!-- ── Dashboard ── -->
+  <section id="stu-dashboard" class="section active">
+    <div class="welcome-banner">
+      <div>
+        <h2>Welcome to Carpentry Works and Residential Structures!</h2>
+        <p>Learn the essential concepts and principles of carpentry works in residential structures.</p>
+      </div>
+      <span class="banner-icon">&#9658;</span>
+    </div>
+    <div class="content-box">
+      <h3>Introduction to Carpentry Works and Residential Structures</h3>
+ 
+      <span class="label-block">What is Carpentry?</span>
+      <p class="body-text">Carpentry is a skilled trade that involves cutting, shaping, and installing building materials during the construction of buildings, ships, timber bridges, concrete formwork, and more. In residential construction, carpentry plays a crucial role in creating the structural framework and finishing elements that make a house functional, safe, and aesthetically pleasing.</p>
+ 
+      <span class="label-block">Importance of Carpentry in Residential Structures</span>
+      <ul class="bullet-list">
+        <li><strong>Structural Integrity:</strong> Proper carpentry ensures the house is structurally sound and can withstand various loads and environmental conditions</li>
+        <li><strong>Safety:</strong> Well-constructed carpentry elements prevent accidents and protect occupants</li>
+        <li><strong>Functionality:</strong> Carpentry creates functional spaces through doors, windows, stairs, and storage solutions</li>
+        <li><strong>Aesthetics:</strong> Quality carpentry work enhances the visual appeal of a home</li>
+        <li><strong>Durability:</strong> Skilled carpentry work ensures long-lasting construction that requires minimal maintenance</li>
+        <li><strong>Energy Efficiency:</strong> Proper installation of windows, doors, and insulation helps regulate temperature</li>
+      </ul>
+ 
+      <span class="label-block">Basic Carpentry Components — Click to open a module</span>
+      <p class="body-text">Each card links directly to its own dedicated module page.</p>
+ 
+      <!--
+        COMPONENT CARDS — each is an <a> tag linking to /modules/{key}.html
+        The href is the only link needed. No JS click handler required.
+      -->
+      <div class="comp-grid">
+        <a class="comp-card" href="partitions.html">
+          <strong>Partitions</strong><span>Interior walls dividing spaces</span>
+        </a>
+        <a class="comp-card" href="roofs.html">
+          <strong>Roofs</strong><span>Protective covering at the top of the house</span>
+        </a>
+        <a class="comp-card" href="ceilings.html">
+          <strong>Ceilings</strong><span>Interior overhead surface of a room</span>
+        </a>
+        <a class="comp-card" href="doors.html">
+          <strong>Doors</strong><span>Movable barriers for entry and privacy</span>
+        </a>
+        <a class="comp-card" href="windows.html">
+          <strong>Windows</strong><span>Openings for light and ventilation</span>
+        </a>
+        <a class="comp-card" href="floors.html">
+          <strong>Floors</strong><span>Walking surfaces within the structure</span>
+        </a>
+        <a class="comp-card" href="stairs.html">
+          <strong>Stairs &amp; Railings</strong><span>Vertical circulation and safety features</span>
+        </a>
+        <a class="comp-card" href="cabinets.html">
+          <strong>Cabinets</strong><span>Storage solutions and fixtures</span>
+        </a>
+      </div>
+    </div>
+  </section><!-- /stu-dashboard -->
+ 
+  <!-- ── Modules ── -->
+  <section id="stu-modules" class="section">
+    <div class="content-box">
+      <h3>Modules</h3>
+      <p class="body-text" style="margin-bottom:20px">
+        Select a module to open its dedicated page. Each page has its own URL that can be turned into a QR code.
+      </p>
+      <!--
+        MODULE LIST — each row is an <a> tag.
+        href="modules/{key}.html" is the QR-code-ready URL.
+        No duplicate JS handlers needed.
+      -->
+      <div class="module-list">
+        <a class="module-row" href="partitions.html">
+          <div class="row-num">01</div>
+          <div class="row-info"><strong>Partitions</strong><span>Types, materials, and installation of residential partitions</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="roofs.html">
+          <div class="row-num">02</div>
+          <div class="row-info"><strong>Roofs</strong><span>Roofing systems, materials, and construction techniques</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="ceilings.html">
+          <div class="row-num">03</div>
+          <div class="row-info"><strong>Ceilings</strong><span>Ceiling types, installation, and finishing</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="doors.html">
+          <div class="row-num">04</div>
+          <div class="row-info"><strong>Doors</strong><span>Door types, frames, and hardware installation</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="windows.html">
+          <div class="row-num">05</div>
+          <div class="row-info"><strong>Windows</strong><span>Window types, glazing, and installation</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="floors.html">
+          <div class="row-num">06</div>
+          <div class="row-info"><strong>Floors</strong><span>Flooring materials, sub-floors, and installation</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="stairs.html">
+          <div class="row-num">07</div>
+          <div class="row-info"><strong>Stairs &amp; Railings</strong><span>Stair design, construction, and railing systems</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+        <a class="module-row" href="cabinets.html">
+          <div class="row-num">08</div>
+          <div class="row-info"><strong>Cabinets</strong><span>Cabinet construction, joinery, and installation</span></div>
+          <div class="row-arrow">›</div>
+        </a>
+      </div>
+    </div>
+  </section><!-- /stu-modules -->
+ 
+  <!-- ── Assessments ── -->
+  <section id="stu-assessments" class="section">
+    <div class="content-box">
+      <h3>Assessments</h3>
+      <p class="body-text" style="margin-bottom:20px">Assessments and activities posted by your teacher will appear here.</p>
+      <div id="stu-assess-list" class="rc-list"></div>
+      <p id="stu-assess-empty" style="color:var(--brown-light);font-style:italic;font-size:.92rem;display:none">
+        No assessments posted yet. Check back later!
+      </p>
+    </div>
+  </section><!-- /stu-assessments -->
+ 
+</div><!-- /page-student -->
+ 
+ 
+<!-- ══════════════════════════════════════
+     TEACHER PAGE
+     ══════════════════════════════════════ -->
+<div id="page-teacher" class="page">
+ 
+  <nav class="top-nav">
+    <span class="nav-brand" onclick="goTo('page-landing')">BAHAY KUBO</span>
+    <div class="nav-links">
+      <a href="#" class="nav-link active"
+         onclick="showTeacherSection('t-home'); return false;">Dashboard</a>
+      <a href="#" class="nav-link"
+         onclick="showTeacherSection('t-dll'); return false;">Lesson Log</a>
+      <a href="#" class="nav-link"
+         onclick="showTeacherSection('t-modules'); return false;">Modules</a>
+      <a href="#" class="nav-link"
+         onclick="showTeacherSection('t-resources'); return false;">Resources</a>
+    </div>
+  </nav>
+ 
+  <!-- ── Teacher Home ── -->
+  <section id="t-home" class="section active">
+    <div class="welcome-banner">
+      <div><h2>Welcome, Teacher!</h2><p>Manage lesson logs, module activities, and assessment resources from here.</p></div>
+      <span class="banner-icon">📋</span>
+    </div>
+    <div class="teacher-grid">
+      <div class="t-card" onclick="showTeacherSection('t-dll')">
+        <span class="t-card-icon">📄</span>
+        <div class="t-card-text"><strong>Daily Lesson Log</strong><span>View pre-made DLLs, create editable copies, archive, or print</span></div>
+      </div>
+      <div class="t-card" onclick="showTeacherSection('t-modules')">
+        <span class="t-card-icon">📚</span>
+        <div class="t-card-text"><strong>Module Activities</strong><span>Create resource cards and drag them into module slots</span></div>
+      </div>
+      <div class="t-card" onclick="showTeacherSection('t-resources')">
+        <span class="t-card-icon">📁</span>
+        <div class="t-card-text"><strong>Resources &amp; Assessments</strong><span>Set Google Drive link and manage student assessment cards</span></div>
+      </div>
+    </div>
+  </section><!-- /t-home -->
+ 
+  <!-- ── Daily Lesson Log ── -->
+  <section id="t-dll" class="section">
+    <div class="content-box">
+ 
+      <!-- LIST VIEW -->
+      <div id="dll-list">
+        <div class="dll-header"><h3>📄 Daily Lesson Logs</h3></div>
+ 
+        <!-- Tab bar: Premade | Edited Copies | Archived -->
+        <div class="tab-bar">
+          <button id="dll-tab-premade"  class="tab-btn active" onclick="switchDLLTab('premade')">🔒 Pre-made DLLs</button>
+          <button id="dll-tab-copies"   class="tab-btn"        onclick="switchDLLTab('copies')">✏️ Edited Copies</button>
+          <button id="dll-tab-archived" class="tab-btn"        onclick="switchDLLTab('archived')">📦 Archived</button>
+        </div>
+ 
+        <div id="dll-grid" class="dll-grid">
+          <!-- Populated by renderDLLList() in app.js -->
+        </div>
+      </div><!-- /dll-list -->
+ 
+      <!-- EDITOR VIEW (hidden until a DLL is opened) -->
+      <div id="dll-editor" class="editor-wrap">
+        <div class="editor-top">
+          <button class="btn-back" onclick="closeDLLEditor()">← Back to All DLLs</button>
+          <!-- Static label shown for premade (readonly) -->
+          <span id="dll-editor-label" class="editor-label"></span>
+          <!-- Rename input shown for editable copies -->
+          <input id="dll-rename" class="rename-input" type="text"
+                 placeholder="Rename DLL…" style="display:none"
+                 oninput="saveCurrentDLL()"/>
+          <div class="editor-actions">
+            <button class="btn ghost" onclick="printCurrentDLL()">🖨 Print</button>
+            <button id="dll-save-btn" class="btn" onclick="saveCurrentDLL()">💾 Save</button>
+          </div>
+        </div>
+ 
+        <!-- DLL FORM -->
+        <div class="dll-form">
+          <div class="grid-3">
+            <div class="f-field"><label>School</label><input class="f-input" id="f-school" placeholder="School Name"/></div>
+            <div class="f-field"><label>Grade &amp; Section</label><input class="f-input" id="f-grade" placeholder="e.g. Grade 9 – Narra"/></div>
+            <div class="f-field"><label>Quarter</label><input class="f-input" id="f-quarter" placeholder="e.g. 1st/3rd Quarter"/></div>
+            <div class="f-field"><label>Subject</label><input class="f-input" id="f-subject" placeholder="Industrial Arts – Carpentry"/></div>
+            <div class="f-field"><label>Date / Time / Venue</label><input class="f-input" id="f-week" placeholder="Week 1 · June 3–7, 2025"/></div>
+          </div>
+          <div class="h-rule"></div>
+          <div class="section-title">I. Objectives</div>
+          <div class="f-field"><label>A. Content Standards</label><textarea class="f-textarea" id="f-content-std" rows="3"></textarea></div>
+          <div class="f-field"><label>B. Performance Standards</label><textarea class="f-textarea" id="f-perf-std" rows="3"></textarea></div>
+          <div class="f-field"><label>C. Learning Competencies / Objectives <span class="f-hint">(write the LC code for each)</span></label><textarea class="f-textarea" id="f-objectives" rows="6"></textarea></div>
+          <div class="h-rule"></div>
+          <div class="section-title">II. Content</div>
+          <div class="grid-2">
+            <div class="f-field"><label>Subject Matter</label><input class="f-input" id="f-subject-matter" placeholder="e.g. Carpentry Works – Partitions"/></div>
+            <div class="f-field"><label>References</label><input class="f-input" id="f-references" placeholder="e.g. MATATAG CG p. 169"/></div>
+          </div>
+          <div class="f-field"><label>Materials / Learning Resources</label><input class="f-input" id="f-materials" placeholder="e.g. Laptop, miniature house model, slide presentation"/></div>
+          <div class="h-rule"></div>
+          <div class="section-title">III. Procedures</div>
+          <div class="f-field"><label>A. Reviewing / Presenting the New Lesson</label><textarea class="f-textarea" id="f-review" rows="4"></textarea></div>
+          <div class="f-field"><label>B. Establishing a Purpose for the Lesson / Motivation</label><textarea class="f-textarea" id="f-purpose" rows="4"></textarea></div>
+          <div class="f-field"><label>C. Presenting Examples / Instances of the New Lesson</label><textarea class="f-textarea" id="f-examples" rows="4"></textarea></div>
+          <div class="f-field"><label>D. Discussing New Concepts and Practicing New Skills #1</label><textarea class="f-textarea" id="f-discuss1" rows="4"></textarea></div>
+          <div class="f-field"><label>E. Discussing New Concepts and Practicing New Skills #2</label><textarea class="f-textarea" id="f-discuss2" rows="4"></textarea></div>
+          <div class="f-field"><label>F. Developing Mastery (Leads to Formative Assessment)</label><textarea class="f-textarea" id="f-mastery" rows="4"></textarea></div>
+          <div class="f-field"><label>G. Finding Practical Applications of Concepts and Skills in Daily Living</label><textarea class="f-textarea" id="f-application" rows="4"></textarea></div>
+          <div class="f-field"><label>H. Making Generalizations and Abstractions about the Lesson</label><textarea class="f-textarea" id="f-generalization" rows="4"></textarea></div>
+          <div class="f-field"><label>I. Evaluating Learning</label><textarea class="f-textarea" id="f-evaluation" rows="4"></textarea></div>
+          <div class="f-field"><label>J. Additional Activities for Application or Remediation</label><textarea class="f-textarea" id="f-assignment" rows="3"></textarea></div>
+          <div class="h-rule"></div>
+          <div class="section-title">IV. Remarks</div>
+          <div class="f-field"><textarea class="f-textarea" id="f-remarks" rows="3" placeholder="Write your remarks here…"></textarea></div>
+          <div class="h-rule"></div>
+          <div class="section-title">V. Reflection</div>
+          <div class="grid-2">
+            <div class="f-field"><label>A. No. of learners who earned 80% in the evaluation</label><input class="f-input" id="f-ref1" placeholder="e.g. 35 out of 40"/></div>
+            <div class="f-field"><label>B. No. of learners who require additional activities for remediation</label><input class="f-input" id="f-ref2" placeholder="e.g. 5 learners"/></div>
+          </div>
+          <div class="f-field"><label>C. Did the remedial lessons work? No. of learners who caught up</label><input class="f-input" id="f-ref3" placeholder="e.g. 4 out of 5"/></div>
+          <div class="f-field"><label>D. No. of learners who continue to require remediation</label><input class="f-input" id="f-ref4" placeholder="e.g. 1 learner"/></div>
+          <div class="f-field"><label>E. Which of my teaching strategies worked well? Why?</label><textarea class="f-textarea" id="f-refE" rows="3"></textarea></div>
+          <div class="f-field"><label>F. What difficulties did I encounter which my principal or supervisor can help me solve?</label><textarea class="f-textarea" id="f-refF" rows="3"></textarea></div>
+          <div class="f-field"><label>G. What innovation or localized materials did I use/discover which I wish to share with other teachers?</label><textarea class="f-textarea" id="f-refG" rows="3"></textarea></div>
+        </div><!-- /dll-form -->
+ 
+        <div class="form-bottom">
+          <button class="btn ghost" onclick="printCurrentDLL()">🖨 Print DLL</button>
+          <button id="dll-save-btn-bot" class="btn" onclick="saveCurrentDLL()">💾 Save DLL</button>
+        </div>
+        <div id="dll-save-msg" class="save-msg"></div>
+      </div><!-- /dll-editor -->
+ 
+    </div>
+  </section><!-- /t-dll -->
+ 
+  <!-- ── Module Activities ── -->
+  <section id="t-modules" class="section">
+    <div class="content-box">
+      <h3>📚 Module Activities</h3>
+      <p class="body-text" style="margin-bottom:20px">
+        Create resource cards, then drag them into the module slots below.
+        Cards assigned to a module automatically appear for students on that module's page.
+      </p>
+ 
+      <!-- Resource card pool -->
+      <div class="card-pool">
+        <h5>Your Resource Cards — drag these into the modules below</h5>
+        <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+          <button class="btn" onclick="openNewCard()">+ New Card</button>
+        </div>
+        <!-- Cards rendered here by renderModulePanel() -->
+        <div id="card-pool" class="pool-grid"></div>
+        <p id="pool-empty" style="color:var(--brown-light);font-style:italic;font-size:.88rem;display:none">No cards yet. Create one above.</p>
+ 
+        <!-- New / Edit card form -->
+        <div id="card-form" class="card-form" style="display:none">
+          <h4 id="card-form-title">New Resource Card</h4>
+          <div class="grid-2">
+            <div class="f-field"><label>Card Name</label><input class="f-input" id="cf-name" placeholder="e.g. Partition Types Quiz"/></div>
+            <div class="f-field"><label>Type</label>
+              <select class="f-input" id="cf-type">
+                <option value="🎮 Quizizz">🎮 Quizizz</option>
+                <option value="📋 Padlet">📋 Padlet</option>
+                <option value="📄 Document">📄 Document</option>
+                <option value="🎥 Video">🎥 Video</option>
+                <option value="🔗 Link">🔗 Link</option>
+                <option value="📊 Presentation">📊 Presentation</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-field"><label>Description</label><textarea class="f-textarea" id="cf-desc" rows="2" placeholder="Short description…"></textarea></div>
+          <div class="f-field"><label>Link (URL)</label><input type="url" class="f-input" id="cf-link" placeholder="https://…"/></div>
+          <div class="form-actions">
+            <button class="btn ghost" onclick="closeCardForm()">Cancel</button>
+            <button class="btn" onclick="saveCard()">Save Card</button>
+          </div>
+        </div>
+      </div><!-- /card-pool -->
+ 
+      <!-- Module drop zones -->
+      <h5 style="font-family:var(--font-display);font-size:1rem;color:var(--brown-mid);margin-bottom:12px">
+        Module Slots — drop cards here to assign them to students
+      </h5>
+      <!--
+        Drop zones are rendered by _renderDropZones() in app.js.
+        Each zone corresponds to one module (e.g., zone-partitions → partitions.html).
+      -->
+      <div id="drop-zones" class="drop-grid"></div>
+    </div>
+  </section><!-- /t-modules -->
+ 
+  <!-- ── Resources & Assessments ── -->
+  <section id="t-resources" class="section">
+    <div class="content-box">
+      <h3>📁 Resources &amp; Assessments</h3>
+      <p class="body-text" style="margin-bottom:24px">
+        Set your Google Drive folder link for students, and manage Assessment Cards that appear in the student Assessments tab.
+      </p>
+ 
+      <!-- Google Drive link -->
+      <div class="drive-box">
+        <label class="f-field" style="font-size:.8rem;font-weight:600;color:var(--brown-mid);letter-spacing:.04em;text-transform:uppercase">
+          📂 Main Google Drive Folder Link
+        </label>
+        <div class="drive-row">
+          <input type="url" id="drive-input" class="f-input" placeholder="https://drive.google.com/drive/folders/…"/>
+          <button class="btn" onclick="saveDriveLink()">Save Link</button>
+        </div>
+        <div id="drive-msg" class="save-msg"></div>
+        <div id="drive-preview" class="drive-preview" style="display:none">
+          <span>✅ Drive link saved.</span>
+          <a id="drive-link" href="#" target="_blank">Open Google Drive Folder →</a>
+        </div>
+      </div>
+ 
+      <div class="h-rule" style="margin:20px 0"></div>
+ 
+      <!-- Assessment cards -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
+        <h4 style="font-family:var(--font-display);font-size:1.1rem;color:var(--brown-dark)">Assessment Cards</h4>
+        <button class="btn" onclick="openNewAssessment()">+ Add Assessment Card</button>
+      </div>
+      <p class="body-text" style="margin-bottom:12px">These cards appear in the student <strong>Assessments</strong> tab.</p>
+ 
+      <div id="assess-cards-list" class="rc-list">
+        <!-- Rendered by renderAssessmentCards() in app.js -->
+      </div>
+ 
+      <!-- Add / Edit assessment card form -->
+      <div id="assess-form" class="card-form" style="display:none">
+        <h4 id="assess-form-title">Add Assessment Card</h4>
+        <div class="grid-2">
+          <div class="f-field"><label>Title</label><input class="f-input" id="af-title" placeholder="e.g. Carpentry Tools Quiz"/></div>
+          <div class="f-field"><label>Type</label>
+            <select class="f-input" id="af-type">
+              <option value="📄 Document">📄 Document</option>
+              <option value="🎥 Video">🎥 Video</option>
+              <option value="🔗 Link">🔗 Link</option>
+              <option value="📊 Presentation">📊 Presentation</option>
+              <option value="🎮 Quizizz">🎮 Quizizz</option>
+              <option value="📋 Padlet">📋 Padlet</option>
+            </select>
+          </div>
+        </div>
+        <div class="f-field"><label>Description</label><textarea class="f-textarea" id="af-desc" rows="2" placeholder="Short description…"></textarea></div>
+        <div class="f-field"><label>Link</label><input type="url" class="f-input" id="af-link" placeholder="https://…"/></div>
+        <div class="form-actions">
+          <button class="btn ghost" onclick="closeAssessmentForm()">Cancel</button>
+          <button class="btn" onclick="saveAssessmentCard()">Save Card</button>
+        </div>
+      </div>
+ 
+    </div>
+  </section><!-- /t-resources -->
+ 
+</div><!-- /page-teacher -->
+ 
+ 
+<!-- ══════════════════════════════════════
+     PASSCODE MODAL
+     ══════════════════════════════════════ -->
+<div id="passcode-overlay" class="overlay">
+  <div class="passcode-modal">
+    <button class="modal-close" onclick="closePasscode()">&#10005;</button>
+    <div style="font-size:2.2rem">🔒</div>
+    <h2 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--brown-dark)">Teacher Access</h2>
+    <p style="font-size:.88rem;color:var(--brown-light);margin-top:-8px">Enter your passcode to continue</p>
+    <div class="dots">
+      <span class="dot" id="pin-dot-0"></span>
+      <span class="dot" id="pin-dot-1"></span>
+      <span class="dot" id="pin-dot-2"></span>
+      <span class="dot" id="pin-dot-3"></span>
+    </div>
+    <div id="pin-err" class="pin-err"></div>
+    <div class="keypad">
+      <button class="key" onclick="pressKey('1')">1</button>
+      <button class="key" onclick="pressKey('2')">2</button>
+      <button class="key" onclick="pressKey('3')">3</button>
+      <button class="key" onclick="pressKey('4')">4</button>
+      <button class="key" onclick="pressKey('5')">5</button>
+      <button class="key" onclick="pressKey('6')">6</button>
+      <button class="key" onclick="pressKey('7')">7</button>
+      <button class="key" onclick="pressKey('8')">8</button>
+      <button class="key" onclick="pressKey('9')">9</button>
+      <button class="key k-clear" onclick="clearKey()">⌫</button>
+      <button class="key" onclick="pressKey('0')">0</button>
+      <button class="key k-enter" onclick="submitPin()">✓</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Hidden print target for DLLs -->
+<div id="dll-printable" style="display:none"></div>
+ 
+<!-- Load data first, then app logic -->
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var target = sessionStorage.getItem('goto');
+    if (target === 'student-dashboard') {
+      sessionStorage.removeItem('goto');
+      goTo('page-student');
+      showStudentSection('dashboard');
+    }
+  });
+</script>
+ 
+</body>
+</html>
